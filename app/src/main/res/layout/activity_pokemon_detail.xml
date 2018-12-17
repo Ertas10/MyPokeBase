@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detalhes.Pokemon_detail">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="446dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/PokemonNameDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="PokemonName" />
+
+            <TextView
+                android:id="@+id/PokemonNumberDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="PokemonNumber" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/pokemonImageViewDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/alert_light_frame" />
+
+        <ListView
+            android:id="@+id/atackList"
+            android:layout_width="368dp"
+            android:layout_height="258dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="137dp">
+
+        </ListView>
+
+        <ListView
+            android:id="@+id/Evolution"
+            android:layout_width="367dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
