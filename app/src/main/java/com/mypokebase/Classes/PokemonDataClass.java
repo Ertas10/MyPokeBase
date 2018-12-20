@@ -1,5 +1,9 @@
 package com.mypokebase.Classes;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +15,7 @@ public class PokemonDataClass {
     int spAttack;
     int spDefense;
     int speed;
-    int id;
+    String id;
     String chineseName;
     String englishName;
     String japaneseName;
@@ -47,7 +51,7 @@ public class PokemonDataClass {
         return speed;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -91,7 +95,7 @@ public class PokemonDataClass {
         return typesJapanese;
     }
 
-    public PokemonDataClass(int attack, int defense, int hp, int spAttack, int spDefense, int speed, int id, String chineseName, String englishName, String japaneseName, ArrayList<Integer> eggMovesID, ArrayList<Integer> levelUpMovesID, ArrayList<Integer> tmMovesID, ArrayList<Integer> transferMovesID, ArrayList<Integer> tutorMovesID, ArrayList<Integer> preEvolutionMovesID, ArrayList<String> typesJapanese) {
+    public PokemonDataClass(int attack, int defense, int hp, int spAttack, int spDefense, int speed, String id, String chineseName, String englishName, String japaneseName, ArrayList<Integer> eggMovesID, ArrayList<Integer> levelUpMovesID, ArrayList<Integer> tmMovesID, ArrayList<Integer> transferMovesID, ArrayList<Integer> tutorMovesID, ArrayList<Integer> preEvolutionMovesID, ArrayList<String> typesJapanese) {
         this.attack = attack;
         this.defense = defense;
         this.hp = hp;
@@ -109,5 +113,190 @@ public class PokemonDataClass {
         this.tutorMovesID = tutorMovesID;
         this.preEvolutionMovesID = preEvolutionMovesID;
         this.typesJapanese = typesJapanese;
+    }
+
+    public static ArrayList<PokemonDataClass> JSONToPokemonList(JSONObject json){
+        ArrayList<PokemonDataClass> res = null;
+        try {
+            JSONArray pokemonArray = json.getJSONArray("Pokémons");
+            res = new ArrayList<PokemonDataClass>();
+            for(int i = 0; i < pokemonArray.length(); i++){
+                JSONObject pokemon = pokemonArray.getJSONObject(i);
+                JSONObject base;
+                JSONObject skills;
+                JSONArray preEvolution;
+                JSONArray transfer;
+                JSONArray egg;
+                JSONArray levelUp;
+                JSONArray tm;
+                JSONArray tutor;
+                JSONArray types;
+                String ename;
+                String cname;
+                String jname;
+                String id = "";
+                Integer attack = 0;
+                Integer defense = 0;
+                Integer hp = 0;
+                Integer spatk = 0;
+                Integer spdef = 0;
+                Integer speed = 0;
+                ArrayList<String> typesList = new ArrayList<String>();
+                ArrayList<Integer> preEvolutionList = new ArrayList<Integer>();
+                ArrayList<Integer> transferList = new ArrayList<Integer>();
+                ArrayList<Integer> eggList = new ArrayList<Integer>();
+                ArrayList<Integer> levelUpList = new ArrayList<Integer>();
+                ArrayList<Integer> tmList = new ArrayList<Integer>();
+                ArrayList<Integer> tutorList = new ArrayList<Integer>();
+                try{
+                    ename = pokemon.getString("ename");
+                }
+                catch (JSONException e){
+                    ename = "";
+                }
+                try{
+                    cname = pokemon.getString("cname");
+                }
+                catch (JSONException e){
+                    cname = "";
+                }
+                try{
+                    jname = pokemon.getString("jname");
+                }
+                catch (JSONException e){
+                    jname = "";
+                }
+                try{
+                    id = pokemon.getString("id");
+                }
+                catch (JSONException e){
+                    pokemon.getString("id");
+                }
+                try{
+                    base = pokemon.getJSONObject("base");
+                    try {
+                        attack = base.getInt("Attack");
+                    }
+                    catch (JSONException e){
+                        attack = 0;
+                    }
+                    try {
+                        defense = base.getInt("Defense");
+                    }
+                    catch (JSONException e){
+                         defense = 0;
+                    }
+                    try {
+                        hp = base.getInt("HP");
+                    }
+                    catch (JSONException e){
+                        hp = 0;
+                    }
+                    try {
+                        spatk = base.getInt("SpAtk");
+                    }
+                    catch (JSONException e){
+                        spatk = 0;
+                    }
+                    try {
+                        spdef = base.getInt("SpDef");
+                    }
+                    catch (Exception e){
+                        spdef = 0;
+                    }
+                    try {
+                        speed = base.getInt("Speed");
+                    }
+                    catch (JSONException e){
+                        speed = 0;
+                    }
+                }
+                catch (JSONException e){
+                    base = null;
+                }
+                try{
+                    skills = pokemon.getJSONObject("skills");
+                    try{
+                        preEvolution = skills.getJSONArray("pre-evolution");
+                        for (int j = 0; j < preEvolution.length(); j++) {
+                            preEvolutionList.add(preEvolution.getInt(j));
+                        }
+                    }
+                    catch (JSONException e){
+                        preEvolution = null;
+                        preEvolutionList = null;
+                    }
+                    try{
+                        transfer = skills.getJSONArray("transfer");
+                        for(int j = 0; j < transfer.length(); j++){
+                            transferList.add(transfer.getInt(j));
+                        }
+
+                    }
+                    catch (JSONException e){
+                        transfer = null;
+                        transferList = null;
+                    }
+                    try{
+                        egg = skills.getJSONArray("egg");
+                        for(int j = 0; j < egg.length(); j++){
+                            eggList.add(egg.getInt(j));
+                        }
+                    }
+                    catch (JSONException e){
+                        egg = null;
+                        eggList = null;
+                    }
+                    try{
+                        levelUp = skills.getJSONArray("level_up");
+                        for(int j = 0; j < levelUp.length(); j++){
+                            levelUpList.add(levelUp.getInt(j));
+                        }
+                    }
+                    catch (JSONException e){
+                        levelUp = null;
+                        levelUpList = null;
+                    }
+                    try{
+                        tm = skills.getJSONArray("tm");
+                        for(int j = 0; j < tm.length(); j++){
+                            tmList.add(tm.getInt(j));
+                        }
+                    }
+                    catch (JSONException e){
+                        tm = null;
+                        tmList = null;
+                    }
+                    try{
+                        tutor = skills.getJSONArray("tutor");
+                        for(int j = 0; j < tutor.length(); j++){
+                            tutorList.add(tutor.getInt(j));
+                        }
+                    }
+                    catch (JSONException e){
+                        tutor = null;
+                        tutorList = null;
+                    }
+                }
+                catch (JSONException e){
+                    skills = null;
+                }
+                try{
+                    types = pokemon.getJSONArray("type");
+                    for(int j = 0; j < types.length(); j++){
+                        typesList.add((String) types.get(i));
+                    }
+                }
+                catch (JSONException e){
+                    types = null;
+                    typesList = null;
+                }
+                res.add(new PokemonDataClass(attack, defense, hp, spatk, spdef, speed, id, cname, ename, jname, eggList, levelUpList, tmList, transferList, tutorList, preEvolutionList, typesList));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }

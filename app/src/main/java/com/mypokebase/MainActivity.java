@@ -14,17 +14,30 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.mypokebase.Classes.ItemsDataClass;
+import com.mypokebase.Classes.PokemonDataClass;
+import com.mypokebase.Classes.SkillsDataClass;
+import com.mypokebase.Classes.TypesDataClass;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference dataRef;
+    static ArrayList<PokemonDataClass> pokemons;
+    static ArrayList<ItemsDataClass> items;
+    static ArrayList<TypesDataClass> types;
+    static ArrayList<SkillsDataClass> moves;
     String value;
-    Map<String, String> data;
+    JSONObject data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +51,13 @@ public class MainActivity extends AppCompatActivity {
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                data = (Map<String, String>) dataSnapshot.getValue();
+                Map<String, String> data2 = (Map<String, String>) dataSnapshot.getValue();
+                data = new JSONObject(data2);
+                pokemons = PokemonDataClass.JSONToPokemonList(data);
+                items = ItemsDataClass.JSONToItemList(data);
+                types = TypesDataClass.JSONToTypeList(data);
+                moves = SkillsDataClass.JSONToSkillList(data);
+                return;
             }
 
             @Override
