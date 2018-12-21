@@ -16,10 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".detalhes.Pokemon_detail" />
-        <activity android:name=".detalhes.Item_detail" />
-        <activity android:name=".detalhes.Moves_details" />
-        <activity android:name=".detalhes.Tipos" />
+        <activity android:name=".detalhes.PokemonActivity" />
+        <activity android:name=".detalhes.ItemActivity" />
+        <activity android:name=".detalhes.MovesActivity" />
+        <activity android:name=".detalhes.TypesActivity" />
         <activity android:name=".listas.item_list" />
         <activity android:name=".listas.Pokemon_list" />
         <activity android:name=".listas.Moves_list" />

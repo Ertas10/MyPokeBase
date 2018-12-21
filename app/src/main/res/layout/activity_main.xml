@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:weightSum="8">
+    android:orientation="vertical"
+    android:weightSum="8"
+    tools:context=".MainActivity">
 
 
     <Button
         android:id="@+id/button_pokemon"
         android:layout_width="212dp"
         android:layout_height="0dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="10dp"
         android:layout_weight="2"
-        android:text="Pokemon" />
+        android:text="Pokemon"
+        app:layout_constraintBottom_toTopOf="@+id/button_moves"
+        app:layout_constraintEnd_toEndOf="@+id/button_moves"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/button_moves"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_moves"
         android:layout_width="212dp"
         android:layout_height="0dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_weight="2"
-        android:text="Moves" />
+        android:text="Moves"
+        app:layout_constraintBottom_toTopOf="@+id/button_items"
+        app:layout_constraintEnd_toEndOf="@+id/button_items"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/button_items"
+        app:layout_constraintTop_toBottomOf="@+id/button_pokemon" />
 
     <Button
         android:id="@+id/button_items"
@@ -35,18 +39,22 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:text="Items"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/button_types"
+        app:layout_constraintEnd_toEndOf="@+id/button_types"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/button_types"
+        app:layout_constraintTop_toBottomOf="@+id/button_moves" />
 
     <Button
-        android:id="@+id/button_tipos"
+        android:id="@+id/button_types"
         android:layout_width="210dp"
         android:layout_height="0dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_weight="2"
-        android:text="Tipos" />
+        android:text="Tipos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_items" />
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

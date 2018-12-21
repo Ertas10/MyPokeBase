@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "353889709000-h7p6t0o5a5b8kba018h603ec0336dbd5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mypokebase",
+            "certificate_hash": "d9589bd6b47447e2ae53fec2dd0a6a562e2368d8"
+          }
+        },
+        {
           "client_id": "353889709000-0f758ctt86gr38oiofv010icl6uq2ksi.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353889709000-0f758ctt86gr38oiofv010icl6uq2ksi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

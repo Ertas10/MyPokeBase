@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.mypokebase.R;
 
-public class Tipos extends AppCompatActivity {
+public class ItemActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tipos);
+        setContentView(R.layout.activity_item_detail);
     }
 }

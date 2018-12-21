@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.mypokebase.R;
 
-public class Pokemon_detail extends AppCompatActivity {
+public class MovesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pokemon_detail);
+        setContentView(R.layout.activity_moves_details);
     }
 }
