@@ -112,7 +112,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(moves != null) {
                     Intent intent = new Intent(MainActivity.this, Moves_list.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable("Moves", moves);
+                    intent.putExtras(b);
                     startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Getting moves, make sure you have an internet connection", new Integer(3)).show();
                 }
             }
         });
@@ -121,7 +127,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(items != null) {
                     Intent intent = new Intent(MainActivity.this, item_list.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable("Items", items);
+                    intent.putExtras(b);
                     startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Getting items, make sure you have an internet connection", new Integer(3)).show();
                 }
             }
         });
@@ -130,7 +142,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(types != null) {
                     Intent intent = new Intent(MainActivity.this, Tipo_list.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable("Types", types);
+                    intent.putExtras(b);
                     startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Getting types, make sure you have an internet connection", new Integer(3)).show();
                 }
             }
         });
