@@ -26,8 +26,7 @@ public class Pokemon_list extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = getIntent().getExtras();
-        pokemons = (ArrayList<PokemonDataClass>) bundle.getSerializable("Pokemon");
+        pokemons = PokemonDataClass.pokemons;
         setContentView(R.layout.activity_pokemon_list);
         listView = findViewById(R.id.PokemonListmanager);
         adapter = new PokemonListAdapter();

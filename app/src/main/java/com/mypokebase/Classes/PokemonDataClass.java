@@ -10,6 +10,8 @@ import java.util.List;
 
 public class PokemonDataClass implements Serializable {
 
+    public static ArrayList<PokemonDataClass> pokemons = null;
+
     int attack;
     int defense;
     int hp;

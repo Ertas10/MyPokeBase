@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mypokebase.Classes.SkillsDataClass;
+import com.mypokebase.Classes.TypesDataClass;
 import com.mypokebase.R;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class Moves_list extends AppCompatActivity {
             TextView moveName = convertView.findViewById(R.id.ItemNameList);
             TextView moveType = convertView.findViewById(R.id.ItemtypeList);
             moveName.setText(moves.get(position).getEname());
-            moveType.setText(moves.get(position).getType());
+            moveType.setText(TypesDataClass.translateType(moves.get(position).getType()));
             convertView.setTag(new Integer(position));
             convertView.setClickable(true);
             convertView.setOnClickListener(this);

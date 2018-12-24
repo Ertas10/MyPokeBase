@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 items = ItemsDataClass.JSONToItemList(data);
                 types = TypesDataClass.JSONToTypeList(data);
                 moves = SkillsDataClass.JSONToSkillList(data);
+                TypesDataClass.types = types;
+                PokemonDataClass.pokemons = pokemons;
             }
 
             @Override
@@ -97,9 +99,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(pokemons != null) {
                     Intent intent = new Intent(MainActivity.this, Pokemon_list.class);
-                    Bundle b = new Bundle();
-                    b.putSerializable("Pokemon", pokemons);
-                    intent.putExtras(b);
                     startActivity(intent);
                 }
                 else{
