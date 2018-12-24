@@ -10,6 +10,7 @@ import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -66,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReferenceFromUrl("gs://mypokebase-95b63.appspot.com");
+
         database = FirebaseDatabase.getInstance();
         dataRef = database.getReference();
         dataRef.addValueEventListener(new ValueEventListener() {
@@ -77,12 +81,10 @@ public class MainActivity extends AppCompatActivity {
                 items = ItemsDataClass.JSONToItemList(data);
                 types = TypesDataClass.JSONToTypeList(data);
                 moves = SkillsDataClass.JSONToSkillList(data);
-                Log.w("Done", "Done");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("Fuck off", "Fuck off");
             }
         });
 
@@ -99,6 +101,9 @@ public class MainActivity extends AppCompatActivity {
                     b.putSerializable("Pokemon", pokemons);
                     intent.putExtras(b);
                     startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Getting pokemons, make sure you have an internet connection", new Integer(3)).show();
                 }
             }
         });
