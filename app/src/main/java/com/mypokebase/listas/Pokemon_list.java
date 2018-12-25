@@ -1,6 +1,7 @@
 package com.mypokebase.listas;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -75,7 +76,10 @@ public class Pokemon_list extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-
+            int position = (int)v.getTag();
+            Intent intent = new Intent(Pokemon_list.this, PokemonActivity.class);
+            intent.putExtra("Position", position);
+            startActivity(intent);
         }
     }
 }

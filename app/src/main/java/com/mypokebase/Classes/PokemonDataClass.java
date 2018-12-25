@@ -25,6 +25,8 @@ public class PokemonDataClass implements Serializable {
     String englishName;
     String japaneseName;
     Bitmap thm;
+    Bitmap spr;
+    Bitmap img;
     ArrayList<Integer> eggMovesID;
     ArrayList<Integer> levelUpMovesID;
     ArrayList<Integer> tmMovesID;
@@ -101,9 +103,18 @@ public class PokemonDataClass implements Serializable {
         return typesJapanese;
     }
 
-    public Bitmap getThm () { return thm; }
+    public Bitmap getThm() { return thm; }
 
-    public void setThm (Bitmap bm){ thm = bm; }
+    public Bitmap getSpr() { return spr; }
+
+    public Bitmap getImg() { return img; }
+
+    public void setSpr (Bitmap bm) { spr = bm; }
+
+    public void setImg (Bitmap bm) { img = bm; }
+
+    public void setThm (Bitmap bm) { thm = bm; }
+
 
     public PokemonDataClass(int attack, int defense, int hp, int spAttack, int spDefense, int speed, String id, String chineseName, String englishName, String japaneseName, ArrayList<Integer> eggMovesID, ArrayList<Integer> levelUpMovesID, ArrayList<Integer> tmMovesID, ArrayList<Integer> transferMovesID, ArrayList<Integer> tutorMovesID, ArrayList<Integer> preEvolutionMovesID, ArrayList<String> typesJapanese) {
         this.attack = attack;

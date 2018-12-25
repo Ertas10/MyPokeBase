@@ -72,7 +72,9 @@ public class MainActivity extends AppCompatActivity {
     Button movesButton;
     Button itemsButton;
     Button typesButton;
-    int bmps = 0;
+    int thms = 0;
+    int imgs = 0;
+    int sprs = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,11 +83,16 @@ public class MainActivity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://mypokebase-95b63.appspot.com");
         thmRef = storageRef.child("thm");
+        sprRef = storageRef.child("spr");
+        imgRef = storageRef.child("img");
         database = FirebaseDatabase.getInstance();
         dataRef = database.getReference();
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                thms = 0;
+                imgs = 0;
+                sprs = 0;
                 Map<String, String> data2 = (Map<String, String>) dataSnapshot.getValue();
                 data = new JSONObject(data2);
                 pokemons = PokemonDataClass.JSONToPokemonList(data);
@@ -98,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
                 for(int i = 0; i < thmPath.size(); i++){
                     final int position = i;
                     StorageReference thmRefPoke = thmRef.child(thmPath.get(i));
+                    StorageReference sprRefPoke = sprRef.child(thmPath.get(i));
+                    StorageReference imgRefPoke = imgRef.child(thmPath.get(i));
                     final long ONE_MEGABYTE = 1024 * 1024;
                     thmRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                         @Override
@@ -106,8 +115,30 @@ public class MainActivity extends AppCompatActivity {
                             options.inMutable = true;
                             Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
                             PokemonDataClass.pokemons.get(position).setThm(bmp);
-                            Log.w("Thm", "" + position);
-                            bmps++;
+                            thms++;
+                            Log.w("Thm", "" + thms);
+                        }
+                    });
+                    sprRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            BitmapFactory.Options options = new BitmapFactory.Options();
+                            options.inMutable = true;
+                            Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+                            PokemonDataClass.pokemons.get(position).setSpr(bmp);
+                            sprs++;
+                            Log.w("Spr", "" + sprs);
+                        }
+                    });
+                    imgRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            BitmapFactory.Options options = new BitmapFactory.Options();
+                            options.inMutable = true;
+                            Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+                            PokemonDataClass.pokemons.get(position).setImg(bmp);
+                            imgs++;
+                            Log.w("Img", "" + imgs);
                         }
                     });
                 }
@@ -125,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         pokemonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pokemons != null && bmps == pokemons.size()) {
+                if(pokemons != null && imgs == pokemons.size() && thms == pokemons.size()) {
                     Intent intent = new Intent(MainActivity.this, Pokemon_list.class);
                     startActivity(intent);
                 }

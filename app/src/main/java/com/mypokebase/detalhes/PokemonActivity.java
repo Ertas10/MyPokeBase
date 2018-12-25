@@ -19,6 +19,11 @@ public class PokemonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pokemon_list);
+        setContentView(R.layout.activity_pokemon_detail);
+        Bundle b = getIntent().getExtras();
+        int position = (int)b.get("Position");
+        TextView pokemonName = findViewById(R.id.PokemonNameDetail);
+        TextView pokemonNumber = findViewById(R.id.PokemonNumberDetail);
+
     }
 }
