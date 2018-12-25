@@ -1,6 +1,7 @@
 package com.mypokebase.listas;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -61,8 +63,10 @@ public class Pokemon_list extends AppCompatActivity {
                 convertView = layoutInflater.inflate(R.layout.zpokemon, null);
             TextView pokemonName = convertView.findViewById(R.id.PokemonNameList);
             TextView pokemonNumber = convertView.findViewById(R.id.PokemonNumberList);
+            ImageView thm = convertView.findViewById(R.id.PokemonImageList);
             pokemonName.setText(pokemons.get(position).getEnglishName());
             pokemonNumber.setText(pokemons.get(position).getId());
+            thm.setImageBitmap(pokemons.get(position).getThm());
             convertView.setTag(new Integer(position));
             convertView.setClickable(true);
             convertView.setOnClickListener(this);

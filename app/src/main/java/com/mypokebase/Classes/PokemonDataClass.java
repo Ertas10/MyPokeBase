@@ -1,5 +1,7 @@
 package com.mypokebase.Classes;
 
+import android.graphics.Bitmap;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +24,7 @@ public class PokemonDataClass implements Serializable {
     String chineseName;
     String englishName;
     String japaneseName;
+    Bitmap thm;
     ArrayList<Integer> eggMovesID;
     ArrayList<Integer> levelUpMovesID;
     ArrayList<Integer> tmMovesID;
@@ -97,6 +100,10 @@ public class PokemonDataClass implements Serializable {
     public ArrayList<String> getTypesJapanese() {
         return typesJapanese;
     }
+
+    public Bitmap getThm () { return thm; }
+
+    public void setThm (Bitmap bm){ thm = bm; }
 
     public PokemonDataClass(int attack, int defense, int hp, int spAttack, int spDefense, int speed, String id, String chineseName, String englishName, String japaneseName, ArrayList<Integer> eggMovesID, ArrayList<Integer> levelUpMovesID, ArrayList<Integer> tmMovesID, ArrayList<Integer> transferMovesID, ArrayList<Integer> tutorMovesID, ArrayList<Integer> preEvolutionMovesID, ArrayList<String> typesJapanese) {
         this.attack = attack;
@@ -299,6 +306,29 @@ public class PokemonDataClass implements Serializable {
 
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+        return res;
+    }
+
+    public static ArrayList<String> JSONToThumbnailPathList(JSONObject json){
+        ArrayList<String> res = null;
+        try{
+            JSONArray pathArray = json.getJSONArray("Paths");
+            res = new ArrayList<String>();
+            for(int i = 0; i < pathArray.length(); i++){
+                JSONObject pathObj = pathArray.getJSONObject(i);
+                String pathStr;
+                try{
+                    pathStr = pathObj.getString("Path");
+                }
+                catch (JSONException e){
+                    pathStr = "";
+                }
+                res.add(pathStr);
+            }
+        }
+        catch (JSONException e){
+
         }
         return res;
     }

@@ -2,6 +2,8 @@ package com.mypokebase;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.storage.StorageManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.internal.Storage;
@@ -40,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,21 +51,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static android.graphics.Bitmap.CompressFormat.PNG;
+
 public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference dataRef;
     FirebaseStorage storage;
     StorageReference storageRef;
+    StorageReference imgRef;
+    StorageReference sprRef;
+    StorageReference thmRef;
     ArrayList<PokemonDataClass> pokemons;
     ArrayList<ItemsDataClass> items;
     ArrayList<TypesDataClass> types;
     ArrayList<SkillsDataClass> moves;
+    ArrayList<String> thmPath;
     String value;
     JSONObject data;
     Button pokemonButton;
     Button movesButton;
     Button itemsButton;
     Button typesButton;
+    int bmps = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://mypokebase-95b63.appspot.com");
-
+        thmRef = storageRef.child("thm");
         database = FirebaseDatabase.getInstance();
         dataRef = database.getReference();
         dataRef.addValueEventListener(new ValueEventListener() {
@@ -81,8 +92,25 @@ public class MainActivity extends AppCompatActivity {
                 items = ItemsDataClass.JSONToItemList(data);
                 types = TypesDataClass.JSONToTypeList(data);
                 moves = SkillsDataClass.JSONToSkillList(data);
+                thmPath = PokemonDataClass.JSONToThumbnailPathList(data);
                 TypesDataClass.types = types;
                 PokemonDataClass.pokemons = pokemons;
+                for(int i = 0; i < thmPath.size(); i++){
+                    final int position = i;
+                    StorageReference thmRefPoke = thmRef.child(thmPath.get(i));
+                    final long ONE_MEGABYTE = 1024 * 1024;
+                    thmRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            BitmapFactory.Options options = new BitmapFactory.Options();
+                            options.inMutable = true;
+                            Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+                            PokemonDataClass.pokemons.get(position).setThm(bmp);
+                            Log.w("Thm", "" + position);
+                            bmps++;
+                        }
+                    });
+                }
             }
 
             @Override
@@ -97,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         pokemonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pokemons != null) {
+                if(pokemons != null && bmps == pokemons.size()) {
                     Intent intent = new Intent(MainActivity.this, Pokemon_list.class);
                     startActivity(intent);
                 }
