@@ -22,8 +22,7 @@ public class item_list extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = getIntent().getExtras();
-        items = (ArrayList<ItemsDataClass>) bundle.getSerializable("Items");
+        items = ItemsDataClass.items;
         setContentView(R.layout.activity_item_list);
         listView = findViewById(R.id.ItemsListmanager);
         adapter = new ItemListAdapter();

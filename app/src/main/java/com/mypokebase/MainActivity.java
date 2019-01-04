@@ -102,13 +102,16 @@ public class MainActivity extends AppCompatActivity {
                 thmPath = PokemonDataClass.JSONToThumbnailPathList(data);
                 TypesDataClass.types = types;
                 PokemonDataClass.pokemons = pokemons;
+                ItemsDataClass.items = items;
+                SkillsDataClass.moves = moves;
                 for(int i = 0; i < thmPath.size(); i++){
                     final int position = i;
-                    StorageReference thmRefPoke = thmRef.child(thmPath.get(i));
-                    StorageReference sprRefPoke = sprRef.child(thmPath.get(i));
-                    StorageReference imgRefPoke = imgRef.child(thmPath.get(i));
+                    //StorageReference thmRefPoke = thmRef.child(thmPath.get(i));
+                    //StorageReference sprRefPoke = sprRef.child(thmPath.get(i));
+                    //StorageReference imgRefPoke = imgRef.child(thmPath.get(i));
+
                     final long ONE_MEGABYTE = 1024 * 1024;
-                    thmRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    /*thmRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                         @Override
                         public void onSuccess(byte[] bytes) {
                             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -118,8 +121,10 @@ public class MainActivity extends AppCompatActivity {
                             thms++;
                             Log.w("Thm", "" + thms);
                         }
-                    });
-                    sprRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    });*/
+
+                    //Don't get this one yet
+                    /*sprRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                         @Override
                         public void onSuccess(byte[] bytes) {
                             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -129,7 +134,8 @@ public class MainActivity extends AppCompatActivity {
                             sprs++;
                             Log.w("Spr", "" + sprs);
                         }
-                    });
+                    });*/
+                    /*
                     imgRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                         @Override
                         public void onSuccess(byte[] bytes) {
@@ -140,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                             imgs++;
                             Log.w("Img", "" + imgs);
                         }
-                    });
+                    });*/
                 }
             }
 
@@ -156,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         pokemonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pokemons != null && imgs == pokemons.size() && thms == pokemons.size()) {
+                if(pokemons != null /*&& imgs == pokemons.size() && thms == pokemons.size()*/) {
                     Intent intent = new Intent(MainActivity.this, Pokemon_list.class);
                     startActivity(intent);
                 }
@@ -170,9 +176,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(moves != null) {
                     Intent intent = new Intent(MainActivity.this, Moves_list.class);
-                    Bundle b = new Bundle();
-                    b.putSerializable("Moves", moves);
-                    intent.putExtras(b);
                     startActivity(intent);
                 }
                 else{
@@ -185,9 +188,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(items != null) {
                     Intent intent = new Intent(MainActivity.this, item_list.class);
-                    Bundle b = new Bundle();
-                    b.putSerializable("Items", items);
-                    intent.putExtras(b);
                     startActivity(intent);
                 }
                 else{
@@ -200,9 +200,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(types != null) {
                     Intent intent = new Intent(MainActivity.this, Tipo_list.class);
-                    Bundle b = new Bundle();
-                    b.putSerializable("Types", types);
-                    intent.putExtras(b);
                     startActivity(intent);
                 }
                 else{

@@ -305,7 +305,7 @@ public class PokemonDataClass implements Serializable {
                 try{
                     types = pokemon.getJSONArray("type");
                     for(int j = 0; j < types.length(); j++){
-                        typesList.add((String) types.get(i));
+                        typesList.add((String) types.get(j));
                     }
                 }
                 catch (JSONException e){

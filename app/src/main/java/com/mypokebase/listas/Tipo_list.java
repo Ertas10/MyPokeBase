@@ -22,8 +22,7 @@ public class Tipo_list extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = getIntent().getExtras();
-        types = (ArrayList<TypesDataClass>) bundle.getSerializable("Types");
+        types = TypesDataClass.types;
         setContentView(R.layout.activity_tipo_list);
         listView = findViewById(R.id.TiposListmanager);
         adapter = new TypesListAdapter();

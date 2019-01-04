@@ -42,6 +42,19 @@ public class TypesDataClass implements Serializable {
         return "";
     }
 
+    public static String translateCategory(String str){
+        if(str.equals("物理")){
+            return "Physical";
+        }
+        if(str.equals("特殊")){
+            return "Special";
+        }
+        if(str.equals("变化")){
+            return "Status";
+        }
+        return "";
+    }
+
     public static ArrayList<TypesDataClass> JSONToTypeList(JSONObject json){
         ArrayList<TypesDataClass> res = null;
         try{

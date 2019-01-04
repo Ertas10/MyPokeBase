@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SkillsDataClass implements Serializable {
-
+    public static ArrayList<SkillsDataClass> moves = null;
     String ename;
     String jname;
     String cname;
@@ -144,5 +144,13 @@ public class SkillsDataClass implements Serializable {
 
         }
         return res;
+    }
+
+    public static  SkillsDataClass FindMoveByID(Integer ID){
+        for(SkillsDataClass move : moves){
+            if(move.getId().equals(ID))
+                return move;
+        }
+        return null;
     }
 }

@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ItemsDataClass implements Serializable {
+    public static ArrayList<ItemsDataClass> items = null;
     String ename;
     String jname;
     String cname;
