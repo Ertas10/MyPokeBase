@@ -135,8 +135,8 @@ public class MainActivity extends AppCompatActivity {
                             Log.w("Spr", "" + sprs);
                         }
                     });*/
-                    /*
-                    imgRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+
+                    /*imgRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                         @Override
                         public void onSuccess(byte[] bytes) {
                             BitmapFactory.Options options = new BitmapFactory.Options();

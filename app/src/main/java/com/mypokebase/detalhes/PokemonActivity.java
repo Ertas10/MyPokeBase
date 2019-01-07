@@ -80,12 +80,12 @@ public class PokemonActivity extends AppCompatActivity {
         eggList = findViewById(R.id.EggMovesList);
         transferList = findViewById(R.id.TransferMovesList);
 
-        levelUpAdapter = new MovesListAdapter(ListType.LevelUp, levelUpMoves);
-        tmAdapter = new MovesListAdapter(ListType.TM, tmMoves);
-        tutorAdapter = new MovesListAdapter(ListType.Tutor, tutorMoves);
-        preEvAdapter = new MovesListAdapter(ListType.PreEv, preEvMoves);
-        eggAdapter = new MovesListAdapter(ListType.Egg, eggMoves);
-        transferAdapter = new MovesListAdapter(ListType.Transfer, transferMoves);
+        levelUpAdapter = new MovesListAdapter(ListType.LevelUp, levelUpMoves, (TextView) findViewById(R.id.textView7));
+        tmAdapter = new MovesListAdapter(ListType.TM, tmMoves, (TextView) findViewById(R.id.textView9));
+        tutorAdapter = new MovesListAdapter(ListType.Tutor, tutorMoves, (TextView) findViewById(R.id.textView8));
+        preEvAdapter = new MovesListAdapter(ListType.PreEv, preEvMoves, (TextView) findViewById(R.id.textView12));
+        eggAdapter = new MovesListAdapter(ListType.Egg, eggMoves, (TextView) findViewById(R.id.textView13));
+        transferAdapter = new MovesListAdapter(ListType.Transfer, transferMoves, (TextView) findViewById(R.id.textView14));
 
         levelUpList.setAdapter(levelUpAdapter);
         tmList.setAdapter(tmAdapter);
@@ -122,12 +122,14 @@ public class PokemonActivity extends AppCompatActivity {
         LayoutInflater layoutInflater;
         ListType listType;
         ArrayList<Integer> movesID;
-        public MovesListAdapter(ListType type, ArrayList<Integer> moves){
+        public MovesListAdapter(ListType type, ArrayList<Integer> moves, TextView text){
             layoutInflater = (LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             this.listType = type;
             this.movesID = moves;
-            if(movesID == null)
+            if(movesID == null){
                 movesID = new ArrayList<Integer>();
+                text.setVisibility(View.INVISIBLE);
+            }
         }
 
         @Override

@@ -1,6 +1,7 @@
 package com.mypokebase.listas;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.mypokebase.Classes.TypesDataClass;
 import com.mypokebase.R;
+import com.mypokebase.detalhes.TypesActivity;
 
 import java.util.ArrayList;
 
@@ -37,7 +39,10 @@ public class Tipo_list extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-
+            int position = (int)v.getTag();
+            Intent intent = new Intent(Tipo_list.this, TypesActivity.class);
+            intent.putExtra("position", position);
+            startActivity(intent);
         }
 
         @Override
