@@ -106,12 +106,12 @@ public class MainActivity extends AppCompatActivity {
                 SkillsDataClass.moves = moves;
                 for(int i = 0; i < thmPath.size(); i++){
                     final int position = i;
-                    //StorageReference thmRefPoke = thmRef.child(thmPath.get(i));
+                    StorageReference thmRefPoke = thmRef.child(thmPath.get(i));
                     //StorageReference sprRefPoke = sprRef.child(thmPath.get(i));
-                    //StorageReference imgRefPoke = imgRef.child(thmPath.get(i));
+                    StorageReference imgRefPoke = imgRef.child(thmPath.get(i));
 
                     final long ONE_MEGABYTE = 1024 * 1024;
-                    /*thmRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    thmRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                         @Override
                         public void onSuccess(byte[] bytes) {
                             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                             thms++;
                             Log.w("Thm", "" + thms);
                         }
-                    });*/
+                    });
 
                     //Don't get this one yet
                     /*sprRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });*/
 
-                    /*imgRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    imgRefPoke.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                         @Override
                         public void onSuccess(byte[] bytes) {
                             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                             imgs++;
                             Log.w("Img", "" + imgs);
                         }
-                    });*/
+                    });
                 }
             }
 
